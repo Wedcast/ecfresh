@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect, createContext, useContext, ReactNode } from 'react';
 import { Banner, Category, Product, Order } from '../types';
 import { LOCAL_STORAGE_KEYS, getFromLocalStorage, setToLocalStorage } from '../utils/localStorage';
@@ -132,26 +133,26 @@ export const AdminDataProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AdminDataContext.Provider value={{
-      banners,
-      categories,
-      products,
-      orders,
-      addBanner,
-      updateBanner,
-      deleteBanner,
-      addCategory,
-      updateCategory,
-      deleteCategory,
-      addProduct,
-      updateProduct,
-      deleteProduct,
-      bulkImportProducts,
-      exportProducts,
-      refreshData
-    }}>
-      {children}
-    </AdminDataContext.Provider>
+    React.createElement(AdminDataContext.Provider, {
+      value: {
+        banners,
+        categories,
+        products,
+        orders,
+        addBanner,
+        updateBanner,
+        deleteBanner,
+        addCategory,
+        updateCategory,
+        deleteCategory,
+        addProduct,
+        updateProduct,
+        deleteProduct,
+        bulkImportProducts,
+        exportProducts,
+        refreshData
+      }
+    }, children)
   );
 };
 
