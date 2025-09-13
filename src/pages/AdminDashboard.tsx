@@ -576,7 +576,7 @@ const AdminModal: React.FC<{
           ...item,
           images: Array.isArray(item.image) ? item.image : [item.image],
           productType: item.variants && item.variants.length > 1 ? 'variable' : 'single',
-          variants: item.variants || [{ weight: '300g', price: 0 }]
+          variants: Array.isArray(item.variants) ? item.variants : [{ weight: '300g', price: 0 }]
         });
       } else {
         setFormData(item);
@@ -604,21 +604,21 @@ const AdminModal: React.FC<{
   const addVariant = () => {
     setFormData({
       ...formData,
-      variants: [...formData.variants, { weight: '500g', price: 0 }]
+      variants: [...(formData.variants || []), { weight: '500g', price: 0 }]
     });
   };
 
   const removeVariant = (index: number) => {
-    if (formData.variants.length > 1) {
+    if ((formData.variants || []).length > 1) {
       setFormData({
         ...formData,
-        variants: formData.variants.filter((_, i) => i !== index)
+        variants: (formData.variants || []).filter((_, i) => i !== index)
       });
     }
   };
 
   const updateVariant = (index: number, field: keyof ProductVariant, value: any) => {
-    const newVariants = [...formData.variants];
+    const newVariants = [...(formData.variants || [])];
     newVariants[index] = { ...newVariants[index], [field]: value };
     setFormData({ ...formData, variants: newVariants });
   };
@@ -816,7 +816,7 @@ const AdminModal: React.FC<{
                           </button>
                         </div>
                         <div className="space-y-3">
-                          {formData.variants.map((variant, index) => (
+                          {(formData.variants || []).map((variant, index) => (
                             <div key={index} className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg">
                               <select
                                 value={variant.weight}
@@ -845,7 +845,7 @@ const AdminModal: React.FC<{
                                 min="0"
                                 step="0.01"
                               />
-                              {formData.variants.length > 1 && (
+                              {(formData.variants || []).length > 1 && (
                                 <button
                                   type="button"
                                   onClick={() => removeVariant(index)}
