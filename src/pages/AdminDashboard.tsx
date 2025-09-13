@@ -575,7 +575,8 @@ const AdminModal: React.FC<{
         setFormData({
           ...item,
           images: Array.isArray(item.image) ? item.image : [item.image],
-          productType: item.variants && item.variants.length > 1 ? 'variable' : 'single'
+          productType: item.variants && item.variants.length > 1 ? 'variable' : 'single',
+          variants: item.variants || [{ weight: '300g', price: 0 }]
         });
       } else {
         setFormData(item);
