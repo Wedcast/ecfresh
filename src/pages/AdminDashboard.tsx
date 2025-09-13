@@ -664,13 +664,11 @@ const AdminModal: React.FC<{
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Image URL</label>
-                      <input
-                        type="url"
-                        value={formData.image}
-                        onChange={(e) => setFormData({...formData, image: e.target.value})}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                        required
+                      <ImageUpload
+                        images={formData.image ? [formData.image] : []}
+                        onChange={(images) => setFormData({...formData, image: images[0] || ''})}
+                        maxImages={1}
+                        label="Banner Image"
                       />
                     </div>
                   </>
@@ -689,13 +687,11 @@ const AdminModal: React.FC<{
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Image URL</label>
-                      <input
-                        type="url"
-                        value={formData.image}
-                        onChange={(e) => setFormData({...formData, image: e.target.value})}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                        required
+                      <ImageUpload
+                        images={formData.image ? [formData.image] : []}
+                        onChange={(images) => setFormData({...formData, image: images[0] || ''})}
+                        maxImages={1}
+                        label="Category Image"
                       />
                     </div>
                   </>
